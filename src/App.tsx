@@ -38,9 +38,10 @@ export default function App() {
                   <div key={index} className="card">
                     <div className="sprite-wrapper">
                       <img
-                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index === 0 ? '' : index + '.png'}`}
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`}
                         alt={pokemon.name}
                       />
+                      <span>{pokemon.name}</span>
                     </div>
                   </div>
                 );

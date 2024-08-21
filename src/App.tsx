@@ -12,17 +12,24 @@ interface Pokemon {
 export default function App() {
   const BASE_URL = 'https://pokeapi.co/api/v2/';
   const [pokemonList, setPokemonList] = useState<Pokemon[]>();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     const fetchPokemon = async () => {
-      // await fetch(`${BASE_URL}/pokemon?limit=${page * 20}`)
-      await fetch(`${BASE_URL}/pokemon?limit=20`)
+      await fetch(`${BASE_URL}/pokemon?limit=20&offset=${page * 20}`)
         .then((response) => response.json())
         .then((response) => setPokemonList(response.results));
     };
+
     fetchPokemon();
   }, [page]);
+
+  const getPokemonPicture = (url: string) => {
+    const pokemon = url
+      .replace('https://pokeapi.co/api/v2/pokemon/', '')
+      .replace('/', '');
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon}.png`;
+  };
 
   return (
     <main>
@@ -35,6 +42,15 @@ export default function App() {
         </div>
       </section>
       <section className="pokemon-list">
+        <div className="pagination">
+          <button disabled={page <= 0} onClick={() => setPage(page - 1)}>
+            <img src={leftArrow} alt="voltar" width={16} height={16} />
+          </button>
+          <p>{page + 1}</p>
+          <button onClick={() => setPage(page + 1)}>
+            <img src={rightArrow} alt="avançar" width={16} height={16} />
+          </button>
+        </div>
         <div className="wrapper">
           {pokemonList
             ? pokemonList?.map((pokemon, index) => {
@@ -42,8 +58,7 @@ export default function App() {
                   <div key={index} className="card">
                     <div className="sprite-wrapper">
                       <img
-                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`}
-                        // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${offset}.png`}
+                        src={getPokemonPicture(pokemon.url)}
                         alt={pokemon.name}
                       />
                       <span>{pokemon.name}</span>
@@ -52,15 +67,6 @@ export default function App() {
                 );
               })
             : 'Carregando...'}
-          <div className="pagination">
-            <button disabled={page <= 1} onClick={() => setPage(page - 1)}>
-              <img src={leftArrow} alt="voltar" width={16} height={16} />
-            </button>
-            <p>{page}</p>
-            <button onClick={() => setPage(page + 1)}>
-              <img src={rightArrow} alt="avançar" width={16} height={16} />
-            </button>
-          </div>
         </div>
       </section>
     </main>

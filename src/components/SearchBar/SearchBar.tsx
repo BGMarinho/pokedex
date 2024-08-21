@@ -1,4 +1,3 @@
-import searchIcon from '../../assets/search.svg';
 import { useState, useEffect } from 'react';
 
 interface SearchBarProps {
@@ -10,25 +9,48 @@ export default function SearchBar({
   searchText,
   setSearchText,
 }: SearchBarProps) {
+  const [foundPokemonId, setFoundPokemonId] = useState<number>();
+  const [foundPokemonName, setFoundPokemonName] = useState<string>();
+
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
   };
 
-  useEffect(() => console.log(searchText), [searchText]);
+  useEffect(() => {
+    const PokemonFetchByNameOrId = async () => {
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${searchText}/`,
+      );
+      const data = await response.json();
+      setFoundPokemonId(data.id);
+      setFoundPokemonName(data.name);
+    };
+
+    PokemonFetchByNameOrId();
+  }, [searchText]);
+
+  const getPokemonPictureById = (id: number | undefined) =>
+    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
   return (
-    <div className="wrapper">
-      <select name="" id=""></select>
+    <div>
+      {/* <select value={} onChange={}></select> */}
 
       <input
         type="text"
-        placeholder="number or name"
+        placeholder="Pesquise por nome ou número"
         onChange={handleTextChange}
       />
 
-      <button>
-        <img src={searchIcon} alt="pesquisa" width={16} height={16} />
-      </button>
+      {foundPokemonId ? (
+        <>
+          <img
+            src={getPokemonPictureById(foundPokemonId)}
+            alt={foundPokemonName}
+          />
+          <p>{foundPokemonName}</p>
+        </>
+      ) : null}
     </div>
   );
 }

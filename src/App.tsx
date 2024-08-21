@@ -31,9 +31,8 @@ export default function App() {
         <SearchBar />
       </section>
       <section className="pokemon-list">
-        <Pagination page={page} setPage={setPage} />
-
         <ListContainer pokemonList={pokemonList} />
+        <Pagination page={page} setPage={setPage} />
       </section>
     </main>
   );

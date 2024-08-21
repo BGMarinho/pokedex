@@ -9,9 +9,6 @@ interface SearchBarProps {
   setFoundPokemonName: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
-export const getPokemonPictureById = (id: number | undefined) =>
-  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-
 export default function SearchBar({
   searchText,
   setSearchText,

@@ -1,5 +1,6 @@
-import Pagination from './Pagination';
+import { getPokemonPictureByURL } from '../../helpers/getPokemonPicture';
 import { useState, useEffect } from 'react';
+import Pagination from './Pagination';
 
 interface IPokemon {
   name: string;
@@ -7,8 +8,6 @@ interface IPokemon {
 }
 
 interface IPokemonList extends Array<IPokemon> {}
-
-// interface PokemonListProps {}
 
 export default function PokemonList() {
   const [pokemonList, setPokemonList] = useState<IPokemonList>();
@@ -25,13 +24,6 @@ export default function PokemonList() {
 
     fetchPokemonList();
   }, [page]);
-
-  const getPokemonPictureByURL = (url: string) => {
-    const pokemon = url
-      .replace('https://pokeapi.co/api/v2/pokemon/', '')
-      .replace('/', '');
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon}.png`;
-  };
 
   return (
     <>

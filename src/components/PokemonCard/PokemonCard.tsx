@@ -1,4 +1,4 @@
-import { getPokemonPictureById } from '../SearchBar/SearchBar';
+import { getPokemonPictureById } from '../../helpers/getPokemonPicture';
 
 interface PokemonCardProps {
   foundPokemonId?: number;

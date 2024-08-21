@@ -1,17 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 interface SearchBarProps {
   searchText: string;
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
+  foundPokemonId?: number;
+  setFoundPokemonId: React.Dispatch<React.SetStateAction<number | undefined>>;
+  foundPokemonName?: string;
+  setFoundPokemonName: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 export default function SearchBar({
   searchText,
   setSearchText,
+  foundPokemonId,
+  setFoundPokemonId,
+  foundPokemonName,
+  setFoundPokemonName,
 }: SearchBarProps) {
-  const [foundPokemonId, setFoundPokemonId] = useState<number>();
-  const [foundPokemonName, setFoundPokemonName] = useState<string>();
-
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
   };

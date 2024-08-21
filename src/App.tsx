@@ -1,5 +1,6 @@
 import SearchBar from './components/SearchBar';
 import PokemonList from './components/PokemonList';
+import { getPokemonPictureById } from './components/SearchBar/SearchBar';
 import { useState } from 'react';
 
 export default function App() {
@@ -21,7 +22,21 @@ export default function App() {
           setFoundPokemonName={setFoundPokemonName}
         />
       </section>
-      <section className="content">{!searchtext && <PokemonList />}</section>
+      <section className="content">
+        {searchtext ? (
+          foundPokemonId ? (
+            <>
+              <img
+                src={getPokemonPictureById(foundPokemonId)}
+                alt={foundPokemonName}
+              />
+              <p>{foundPokemonName}</p>
+            </>
+          ) : null
+        ) : (
+          <PokemonList />
+        )}
+      </section>
     </main>
   );
 }

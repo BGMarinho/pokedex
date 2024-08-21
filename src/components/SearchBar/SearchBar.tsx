@@ -9,6 +9,9 @@ interface SearchBarProps {
   setFoundPokemonName: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
+export const getPokemonPictureById = (id: number | undefined) =>
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+
 export default function SearchBar({
   searchText,
   setSearchText,
@@ -34,9 +37,6 @@ export default function SearchBar({
     PokemonFetchByNameOrId();
   }, [searchText]);
 
-  const getPokemonPictureById = (id: number | undefined) =>
-    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-
   return (
     <div>
       {/* <select value={} onChange={}></select> */}
@@ -46,16 +46,6 @@ export default function SearchBar({
         placeholder="Pesquise por nome ou número"
         onChange={handleTextChange}
       />
-
-      {foundPokemonId ? (
-        <>
-          <img
-            src={getPokemonPictureById(foundPokemonId)}
-            alt={foundPokemonName}
-          />
-          <p>{foundPokemonName}</p>
-        </>
-      ) : null}
     </div>
   );
 }

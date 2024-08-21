@@ -11,7 +11,11 @@ export default function App() {
         <SearchBar searchText={searchtext} setSearchText={setSearchText} />
       </section>
       <section className="content">
-        <PokemonList />
+        {searchtext ? (
+          <>{/* {getPokemonPicture(searchtext)} */}</>
+        ) : (
+          <PokemonList />
+        )}
       </section>
     </main>
   );

@@ -1,38 +1,17 @@
 import SearchBar from './components/SearchBar';
-import ListContainer from './components/ListContainer';
-import Pagination from './components/Pagination';
-import { useState, useEffect } from 'react';
-
-interface Pokemon {
-  name: string;
-  url: string;
-}
-
-export interface PokemonList extends Array<Pokemon> {}
+import PokemonList from './components/PokemonList';
+import { useState } from 'react';
 
 export default function App() {
-  const BASE_URL = 'https://pokeapi.co/api/v2/';
-  const [pokemonList, setPokemonList] = useState<PokemonList>();
-  const [page, setPage] = useState(0);
-
-  useEffect(() => {
-    const fetchPokemon = async () => {
-      await fetch(`${BASE_URL}/pokemon?limit=20&offset=${page * 20}`)
-        .then((response) => response.json())
-        .then((response) => setPokemonList(response.results));
-    };
-
-    fetchPokemon();
-  }, [page]);
+  const [searchtext, setSearchText] = useState('');
 
   return (
     <main>
-      <section className="search-bar">
-        <SearchBar />
+      <section className="header">
+        <SearchBar searchText={searchtext} setSearchText={setSearchText} />
       </section>
-      <section className="pokemon-list">
-        <ListContainer pokemonList={pokemonList} />
-        <Pagination page={page} setPage={setPage} />
+      <section className="content">
+        <PokemonList />
       </section>
     </main>
   );

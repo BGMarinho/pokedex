@@ -15,25 +15,21 @@ interface CardProps {
 
 export default function Card({ typePokemon, pokemon, key }: CardProps) {
   return (
-    <>
+    <S.CardWrapper key={key}>
       {typePokemon ? (
-        <div key={key} className="card">
-          <div className="sprite-wrapper">
-            <img
-              src={getPokemonPictureByURL(typePokemon?.pokemon.url)}
-              alt={typePokemon.pokemon.name}
-            />
-            <span>{typePokemon.pokemon.name}</span>
-          </div>
-        </div>
+        <>
+          <img
+            src={getPokemonPictureByURL(typePokemon?.pokemon.url)}
+            alt={typePokemon.pokemon.name}
+          />
+          <span>{typePokemon.pokemon.name}</span>
+        </>
       ) : pokemon ? (
-        <div key={key} className="card">
-          <div className="sprite-wrapper">
-            <img src={getPokemonPictureByURL(pokemon.url)} alt={pokemon.name} />
-            <span>{pokemon.name}</span>
-          </div>
-        </div>
+        <>
+          <img src={getPokemonPictureByURL(pokemon.url)} alt={pokemon.name} />
+          <span>{pokemon.name}</span>
+        </>
       ) : null}
-    </>
+    </S.CardWrapper>
   );
 }

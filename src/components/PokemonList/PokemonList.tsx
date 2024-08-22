@@ -53,7 +53,6 @@ export default function PokemonList({ typeName, types }: PokemonListProps) {
     PokemonListFetchByType();
   }, [typeName]);
 
-  console.log(typePokemonList);
   return (
     <>
       <div className="wrapper">

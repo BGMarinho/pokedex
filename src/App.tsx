@@ -42,7 +42,7 @@ export default function App() {
             />
           ) : null
         ) : (
-          <PokemonList typeName={typeName} types={types} />
+          <PokemonList typeName={typeName} />
         )}
       </section>
     </main>

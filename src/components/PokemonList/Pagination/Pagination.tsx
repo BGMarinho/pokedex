@@ -1,6 +1,7 @@
 import leftArrow from '../../../assets/left-arrow.svg';
 import rightArrow from '../../../assets/right-arrow.svg';
 import { Dispatch, SetStateAction } from 'react';
+import * as S from './styles';
 
 interface PaginationProps {
   page: number;
@@ -11,7 +12,7 @@ export default function Pagination({ page, setPage }: PaginationProps) {
   const increasePage = () => setPage(page + 1);
   const decreasePage = () => setPage(page - 1);
   return (
-    <div className="pagination">
+    <S.PaginationWrapper>
       <button disabled={page <= 0} onClick={decreasePage}>
         <img src={leftArrow} alt="voltar" width={16} height={16} />
       </button>
@@ -19,6 +20,6 @@ export default function Pagination({ page, setPage }: PaginationProps) {
       <button onClick={increasePage}>
         <img src={rightArrow} alt="avançar" width={16} height={16} />
       </button>
-    </div>
+    </S.PaginationWrapper>
   );
 }

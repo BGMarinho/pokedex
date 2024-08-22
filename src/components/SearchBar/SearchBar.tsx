@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { TypeObj } from '../../App';
+import * as S from './styles';
 
 interface SearchBarProps {
   searchText: string;
@@ -66,8 +67,8 @@ export default function SearchBar({
   }, [typeName]);
 
   return (
-    <div>
-      <select onChange={(e) => setTypeName(e.target.value)}>
+    <S.SearchBarWrapper>
+      <S.SelectType onChange={(e) => setTypeName(e.target.value)}>
         {types?.map((type, index) => {
           return (
             <option key={index} value={type.name}>
@@ -75,13 +76,13 @@ export default function SearchBar({
             </option>
           );
         })}
-      </select>
+      </S.SelectType>
 
-      <input
+      <S.SearchTextInput
         type="text"
         placeholder="Pesquise por nome ou número"
         onChange={handleTextChange}
       />
-    </div>
+    </S.SearchBarWrapper>
   );
 }

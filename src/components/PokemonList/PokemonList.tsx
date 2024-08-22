@@ -8,6 +8,7 @@ import {
   ITypePokemon,
   ITypePokemonList,
 } from './interfaces';
+import * as S from './styles';
 
 interface PokemonListProps {
   typeName?: string;
@@ -43,8 +44,8 @@ export default function PokemonList({ typeName }: PokemonListProps) {
   }, [typeName]);
 
   return (
-    <>
-      <div className="wrapper">
+    <S.PokemonListWrapper>
+      <S.PokemonList>
         {typePokemonList
           ? typePokemonList?.map((typePokemonList, index) => {
               return <Card key={index} typePokemon={typePokemonList} />;
@@ -54,8 +55,8 @@ export default function PokemonList({ typeName }: PokemonListProps) {
                 return <Card key={index} pokemon={pokemon} />;
               })
             : 'Carregando...'}
-      </div>
+      </S.PokemonList>
       <Pagination page={page} setPage={setPage} />
-    </>
+    </S.PokemonListWrapper>
   );
 }

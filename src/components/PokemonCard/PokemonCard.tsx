@@ -22,7 +22,9 @@ export default function PokemonCard({
           alt={foundPokemonName}
         />
         <p>{foundPokemonName}</p>
-        <button onClick={handleShowDetails}>Detalhes</button>
+        <button className="show-details-button" onClick={handleShowDetails}>
+          Detalhes
+        </button>
         {showDetails && (
           <Details identification={foundPokemonId} showDetails={showDetails} />
         )}

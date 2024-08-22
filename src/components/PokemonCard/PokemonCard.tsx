@@ -1,4 +1,5 @@
 import { getPokemonPictureById } from '../../helpers/getPokemonPicture';
+import * as S from './styles';
 
 interface PokemonCardProps {
   foundPokemonId?: number;
@@ -10,9 +11,9 @@ export default function PokemonCard({
   foundPokemonName,
 }: PokemonCardProps) {
   return (
-    <>
+    <S.PokemonCardWrapper>
       <img src={getPokemonPictureById(foundPokemonId)} alt={foundPokemonName} />
       <p>{foundPokemonName}</p>
-    </>
+    </S.PokemonCardWrapper>
   );
 }

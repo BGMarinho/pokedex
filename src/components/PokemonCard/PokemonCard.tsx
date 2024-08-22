@@ -1,6 +1,6 @@
 import { getPokemonPictureById } from '../../helpers/getPokemonPicture';
+import { useState } from 'react';
 import * as S from './styles';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Details from './Details';
 
 interface PokemonCardProps {
@@ -12,24 +12,21 @@ export default function PokemonCard({
   foundPokemonId,
   foundPokemonName,
 }: PokemonCardProps) {
+  const [showDetails, setShowDetails] = useState<boolean>(false);
+  const handleShowDetails = () => setShowDetails(!showDetails);
   return (
-    <Router>
-      <S.PokemonCardWrapper>
+    <S.PokemonCardWrapper>
+      <S.PokemonCard>
         <img
           src={getPokemonPictureById(foundPokemonId)}
           alt={foundPokemonName}
         />
         <p>{foundPokemonName}</p>
-        <Link to={`/${foundPokemonName}`}>Detalhes</Link>
-        <Routes>
-          <Route
-            path={`/${foundPokemonName}`}
-            element={
-              <Details idNumber={foundPokemonId} name={foundPokemonName} />
-            }
-          />
-        </Routes>
-      </S.PokemonCardWrapper>
-    </Router>
+        <button onClick={handleShowDetails}>Detalhes</button>
+        {showDetails && (
+          <Details identification={foundPokemonId} showDetails={showDetails} />
+        )}
+      </S.PokemonCard>
+    </S.PokemonCardWrapper>
   );
 }

@@ -1,14 +1,18 @@
 import * as S from './styles';
+import { useEffect } from 'react';
 
-interface DeatilsProps {
+interface DetailsProps {
   idNumber?: number;
+  name?: string;
 }
 
-export default function Details({ idNumber }: DeatilsProps) {
+export default function Details({ idNumber, name }: DetailsProps) {
+  useEffect(() => {}, []);
+
   return (
-    <>
+    <S.DetailsWrapper>
       <span>Número: {idNumber}</span>
-      <p>Não achei os outros stats na API :/</p>
-    </>
+      <span>Nome: {name}</span>
+    </S.DetailsWrapper>
   );
 }

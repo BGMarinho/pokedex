@@ -24,7 +24,9 @@ export default function PokemonCard({
         <Routes>
           <Route
             path={`/${foundPokemonName}`}
-            element={<Details idNumber={foundPokemonId} />}
+            element={
+              <Details idNumber={foundPokemonId} name={foundPokemonName} />
+            }
           />
         </Routes>
       </S.PokemonCardWrapper>

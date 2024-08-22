@@ -3,12 +3,19 @@ import PokemonList from './components/PokemonList';
 import PokemonCard from './components/PokemonCard';
 import { useState } from 'react';
 
+export interface TypeObj {
+  name: string;
+  url: string;
+}
+
 export default function App() {
   const [searchtext, setSearchText] = useState('');
   const [foundPokemonId, setFoundPokemonId] = useState<number | undefined>();
   const [foundPokemonName, setFoundPokemonName] = useState<
     string | undefined
   >();
+  const [types, setTypes] = useState<TypeObj[] | undefined>();
+  const [typeName, setTypeName] = useState<string | undefined>();
 
   return (
     <main>
@@ -20,6 +27,10 @@ export default function App() {
           setFoundPokemonId={setFoundPokemonId}
           foundPokemonName={foundPokemonName}
           setFoundPokemonName={setFoundPokemonName}
+          types={types}
+          setTypes={setTypes}
+          typeName={typeName}
+          setTypeName={setTypeName}
         />
       </section>
       <section className="content">
@@ -31,7 +42,7 @@ export default function App() {
             />
           ) : null
         ) : (
-          <PokemonList />
+          <PokemonList typeName={typeName} types={types} />
         )}
       </section>
     </main>

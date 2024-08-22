@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { TypeObj } from '../../App';
 
 interface SearchBarProps {
   searchText: string;
@@ -7,6 +8,10 @@ interface SearchBarProps {
   setFoundPokemonId: React.Dispatch<React.SetStateAction<number | undefined>>;
   foundPokemonName?: string;
   setFoundPokemonName: React.Dispatch<React.SetStateAction<string | undefined>>;
+  types?: TypeObj[];
+  setTypes: React.Dispatch<React.SetStateAction<TypeObj[] | undefined>>;
+  typeName?: string;
+  setTypeName: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 export default function SearchBar({
@@ -16,6 +21,10 @@ export default function SearchBar({
   setFoundPokemonId,
   foundPokemonName,
   setFoundPokemonName,
+  types,
+  setTypes,
+  typeName,
+  setTypeName,
 }: SearchBarProps) {
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
@@ -34,9 +43,39 @@ export default function SearchBar({
     PokemonFetchByNameOrId();
   }, [searchText]);
 
+  useEffect(() => {
+    const PokemonFetchTypes = async () => {
+      const response = await fetch(`https://pokeapi.co/api/v2/type/`);
+      const data = await response.json();
+      setTypes(data.results);
+    };
+
+    PokemonFetchTypes();
+  }, []);
+
+  useEffect(() => {
+    const PokemonFetchByTypeName = async () => {
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/type/${typeName}`,
+      );
+      const data = await response.json();
+      setTypeName(data.name);
+    };
+
+    PokemonFetchByTypeName();
+  }, [typeName]);
+
   return (
     <div>
-      {/* <select value={} onChange={}></select> */}
+      <select onChange={(e) => setTypeName(e.target.value)}>
+        {types?.map((type, index) => {
+          return (
+            <option key={index} value={type.name}>
+              {type.name}
+            </option>
+          );
+        })}
+      </select>
 
       <input
         type="text"

@@ -11,11 +11,16 @@ interface PokemonStats {
   stat: { name: string };
 }
 
+type PokemonType = {
+  type: { name: string };
+};
+
 export default function Details({ showDetails, identification }: DetailsProps) {
   const [pokemonStats, setPokemonStats] = useState<{
     id: number;
     name: string;
     stats: PokemonStats[];
+    types: PokemonType[];
   }>();
 
   useEffect(() => {
@@ -34,7 +39,7 @@ export default function Details({ showDetails, identification }: DetailsProps) {
     <>
       {pokemonStats ? (
         <S.DetailsWrapper>
-          <span>Número: {pokemonStats?.id} </span>
+          <span>Número: {pokemonStats?.id}</span>
           <span>Nome: {pokemonStats?.name}</span>
           {pokemonStats.stats.map((each, index) => {
             return (
@@ -42,6 +47,9 @@ export default function Details({ showDetails, identification }: DetailsProps) {
                 {each.stat.name}: {each.base_stat}
               </span>
             );
+          })}
+          {pokemonStats.types.map((type, index) => {
+            return <span key={index}>{type.type.name}</span>;
           })}
         </S.DetailsWrapper>
       ) : null}

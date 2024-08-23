@@ -13,9 +13,8 @@ export const PokemonCard = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 15px;
-  border: 1px solid black;
+
   border-radius: 2%;
-  width: 200px;
   [class*='show-details-button'] {
     all: unset;
     cursor: pointer;

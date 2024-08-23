@@ -1,6 +1,5 @@
 import * as S from './styles';
 import { useEffect, useState } from 'react';
-import PokemonList from '../../PokemonList';
 
 interface DetailsProps {
   identification?: number;
@@ -44,7 +43,7 @@ export default function Details({
   }, [showDetails]);
 
   return (
-    <S.DetailsWrapper>
+    <S.DetailsWrapper typeName={typeName}>
       <span>Número: {pokemonStats?.id}</span>
       <span>Nome: {pokemonStats?.name}</span>
       {pokemonStats?.stats.map((each, index) => {
@@ -57,7 +56,7 @@ export default function Details({
       {pokemonStats?.types.map((type, index) => {
         return (
           <S.TypeButton key={index} onClick={() => setTypeName(type.type.name)}>
-            {type.type.name}
+            Tipo: {type.type.name}
           </S.TypeButton>
         );
       })}

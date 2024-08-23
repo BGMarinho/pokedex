@@ -1,5 +1,5 @@
 import { getPokemonPictureById } from '../../helpers/getPokemonPicture';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as S from './styles';
 import Details from './Details';
 
@@ -17,7 +17,22 @@ export default function PokemonCard({
   setTypeName,
 }: PokemonCardProps) {
   const [showDetails, setShowDetails] = useState<boolean>(false);
-  const handleShowDetails = () => setShowDetails(!showDetails);
+
+  useEffect(() => {
+    const PokemonFetchByNameOrId = async () => {
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${foundPokemonId}/`,
+      );
+      const data = await response.json();
+      setTypeName(data.types[0].type.name);
+    };
+
+    PokemonFetchByNameOrId();
+  }, []);
+
+  const handleShowDetails = () => {
+    setShowDetails(!showDetails);
+  };
   return (
     <S.PokemonCardWrapper>
       <S.PokemonCard>

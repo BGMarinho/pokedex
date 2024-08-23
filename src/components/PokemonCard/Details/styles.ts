@@ -8,3 +8,8 @@ export const DetailsWrapper = styled.div`
   gap: 10px;
   width: inherit;
 `;
+
+export const TypeButton = styled.button`
+  all: unset;
+  cursor: pointer;
+`;

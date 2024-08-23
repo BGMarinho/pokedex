@@ -19,32 +19,30 @@ export default function App() {
 
   return (
     <main>
-      <section className="header">
-        <SearchBar
-          searchText={searchtext}
-          setSearchText={setSearchText}
-          foundPokemonId={foundPokemonId}
-          setFoundPokemonId={setFoundPokemonId}
-          foundPokemonName={foundPokemonName}
-          setFoundPokemonName={setFoundPokemonName}
-          types={types}
-          setTypes={setTypes}
-          typeName={typeName}
-          setTypeName={setTypeName}
-        />
-      </section>
-      <section className="content">
-        {searchtext ? (
-          foundPokemonId ? (
-            <PokemonCard
-              foundPokemonId={foundPokemonId}
-              foundPokemonName={foundPokemonName}
-            />
-          ) : null
-        ) : (
-          <PokemonList typeName={typeName} />
-        )}
-      </section>
+      <SearchBar
+        searchText={searchtext}
+        setSearchText={setSearchText}
+        foundPokemonId={foundPokemonId}
+        setFoundPokemonId={setFoundPokemonId}
+        foundPokemonName={foundPokemonName}
+        setFoundPokemonName={setFoundPokemonName}
+        types={types}
+        setTypes={setTypes}
+        typeName={typeName}
+        setTypeName={setTypeName}
+      />
+      {searchtext ? (
+        foundPokemonId ? (
+          <PokemonCard
+            foundPokemonId={foundPokemonId}
+            foundPokemonName={foundPokemonName}
+            typeName={typeName}
+            setTypeName={setTypeName}
+          />
+        ) : null
+      ) : (
+        <PokemonList typeName={typeName} />
+      )}
     </main>
   );
 }

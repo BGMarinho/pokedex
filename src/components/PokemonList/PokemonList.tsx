@@ -56,7 +56,7 @@ export default function PokemonList({ typeName }: PokemonListProps) {
               })
             : 'Carregando...'}
       </S.PokemonList>
-      <Pagination page={page} setPage={setPage} />
+      {!typeName && <Pagination page={page} setPage={setPage} />}
     </S.PokemonListWrapper>
   );
 }

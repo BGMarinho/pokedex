@@ -1,9 +1,12 @@
 import * as S from './styles';
 import { useEffect, useState } from 'react';
+import PokemonList from '../../PokemonList';
 
 interface DetailsProps {
   identification?: number;
   showDetails?: boolean;
+  typeName?: string;
+  setTypeName: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 interface PokemonStats {
@@ -15,7 +18,12 @@ type PokemonType = {
   type: { name: string };
 };
 
-export default function Details({ showDetails, identification }: DetailsProps) {
+export default function Details({
+  showDetails,
+  identification,
+  typeName,
+  setTypeName,
+}: DetailsProps) {
   const [pokemonStats, setPokemonStats] = useState<{
     id: number;
     name: string;
@@ -36,23 +44,23 @@ export default function Details({ showDetails, identification }: DetailsProps) {
   }, [showDetails]);
 
   return (
-    <>
-      {pokemonStats ? (
-        <S.DetailsWrapper>
-          <span>Número: {pokemonStats?.id}</span>
-          <span>Nome: {pokemonStats?.name}</span>
-          {pokemonStats.stats.map((each, index) => {
-            return (
-              <span key={index}>
-                {each.stat.name}: {each.base_stat}
-              </span>
-            );
-          })}
-          {pokemonStats.types.map((type, index) => {
-            return <span key={index}>{type.type.name}</span>;
-          })}
-        </S.DetailsWrapper>
-      ) : null}
-    </>
+    <S.DetailsWrapper>
+      <span>Número: {pokemonStats?.id}</span>
+      <span>Nome: {pokemonStats?.name}</span>
+      {pokemonStats?.stats.map((each, index) => {
+        return (
+          <span key={index}>
+            {each.stat.name}: {each.base_stat}
+          </span>
+        );
+      })}
+      {pokemonStats?.types.map((type, index) => {
+        return (
+          <S.TypeButton key={index} onClick={() => setTypeName(type.type.name)}>
+            {type.type.name}
+          </S.TypeButton>
+        );
+      })}
+    </S.DetailsWrapper>
   );
 }

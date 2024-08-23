@@ -18,6 +18,7 @@ export const PokemonCard = styled.div`
   width: 200px;
   [class*='show-details-button'] {
     all: unset;
+    cursor: pointer;
     margin-bottom: 20px;
   }
 `;

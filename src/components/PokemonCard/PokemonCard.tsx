@@ -6,11 +6,15 @@ import Details from './Details';
 interface PokemonCardProps {
   foundPokemonId?: number;
   foundPokemonName?: string;
+  typeName?: string;
+  setTypeName: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 export default function PokemonCard({
   foundPokemonId,
   foundPokemonName,
+  typeName,
+  setTypeName,
 }: PokemonCardProps) {
   const [showDetails, setShowDetails] = useState<boolean>(false);
   const handleShowDetails = () => setShowDetails(!showDetails);
@@ -26,7 +30,12 @@ export default function PokemonCard({
           Detalhes
         </button>
         {showDetails && (
-          <Details identification={foundPokemonId} showDetails={showDetails} />
+          <Details
+            identification={foundPokemonId}
+            showDetails={showDetails}
+            typeName={typeName}
+            setTypeName={setTypeName}
+          />
         )}
       </S.PokemonCard>
     </S.PokemonCardWrapper>
